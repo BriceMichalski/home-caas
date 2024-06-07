@@ -25,6 +25,7 @@ releases:
 
     # EXTRA-OPERATOR
     strimzi: 0.33.2
+    mongodb: 0.9.0
 
   installed:
     # STORAGE
@@ -50,6 +51,7 @@ releases:
 
     # EXTRA-OPERATOR
     strimzi: true
+    mongodb: true
 
 apps:
   version:

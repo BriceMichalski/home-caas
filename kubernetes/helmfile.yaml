@@ -58,6 +58,9 @@ repositories:
   - name: jetstack
     url: https://charts.jetstack.io
 
+  - name: mongodb
+    url: https://mongodb.github.io/helm-charts
+
 
 releases:
   # Storage
@@ -142,4 +145,9 @@ releases:
   - name: strimzi
     namespace: extra-operator
     chart: strimzi/strimzi-kafka-operator
+    <<: *default
+
+  - name: mongodb
+    namespace: extra-operator
+    chart: mongodb/community-operator
     <<: *default
