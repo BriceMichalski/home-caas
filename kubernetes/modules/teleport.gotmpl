@@ -11,11 +11,6 @@ service:
 ingress:
   enabled: true
   suppressAutomaticWildcards: true
-  spec:
-    tls:
-      - secretName: mbcaas.com-cert
-        hosts:
-        - "{{ .Values.dns.teleport }}"
 
 annotations:
   service:

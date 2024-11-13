@@ -1,25 +1,19 @@
 ---
 image:
-  tag: {{ .Values.apps.version.errorPages }}
-
+  tag: {{ .Values.apps.version.errorPages}}
 env:
   TEMPLATE_NAME: connection
   SHOW_DETAILS: "false"
 ingress:
   main:
     enabled: true
-    primary: true
     annotations:
       {{ toYaml .Values.helper.ingress.annotations.common | nindent 6 }}
     hosts:
-      - host:  {{ .Values.dns.errorPages }}
+      - host: {{ .Values.dns.errorPages}}
         paths:
-          - path: /
+          - path: "/"
             pathType: Prefix
-    tls:
-    - secretName: mbcaas.com-cert
-      hosts:
-        - {{ .Values.dns.errorPages }}
 
 resources:
   {{ toYaml .Values.quotas.errorpages | nindent 2}}
