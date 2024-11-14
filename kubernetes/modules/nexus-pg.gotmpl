@@ -1,0 +1,11 @@
+auth:
+  enablePostgresUser: true
+  postgresPassword: {{ .Values.secrets.nexus.pgAdminPassword }}
+  database: nexus
+  username: nexus
+  password: {{ .Values.secrets.nexus.pgNexusPassword }}
+
+primary:
+  persistence:
+    storageClass: ssd-block
+    size: 20Gi

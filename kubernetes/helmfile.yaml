@@ -58,6 +58,8 @@ repositories:
   - name: jetstack
     url: https://charts.jetstack.io
 
+  - name: sonatype
+    url: https://sonatype.github.io/helm3-charts/
 
 releases:
   # Storage
@@ -142,4 +144,15 @@ releases:
   - name: strimzi
     namespace: extra-operator
     chart: strimzi/strimzi-kafka-operator
+    <<: *default
+
+  # Tools
+  - name: nexus-pg
+    namespace: mbcaas-tools
+    chart: bitnami/postgresql
+    <<: *default
+
+  - name: nexus
+    namespace: mbcaas-tools
+    chart: sonatype/nxrm-ha
     <<: *default

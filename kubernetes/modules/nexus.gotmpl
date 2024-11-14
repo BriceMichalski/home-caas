@@ -1,0 +1,65 @@
+namespaces:
+  nexusNs:
+    enabled: false
+    name: mbcaas-tools
+
+storageClass:
+  name: ssd-file
+
+pvc:
+  storage: 50Gi
+  volumeClaimTemplate:
+    enabled: true
+
+ingress:
+  enabled: true
+  host: {{ .Values.dns.nexus }}
+  annotations:
+    {{ toYaml .Values.helper.ingress.annotations.common | nindent 4 }}
+  additionalRules:
+    - host: nexus.mbcaas.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nexus-nxrm-ha-hl
+                port:
+                  number: 8081
+
+statefulset:
+  replicaCount: 1
+  clustered: false
+  nodeSelector:
+    kubernetes.io/arch: amd64
+  container:
+    resources:
+      # See help documentation, these are minimum system requirements
+      requests:
+        cpu: 1
+        memory: "2Gi"
+      limits:
+        cpu: 1
+        memory: "2Gi"
+    additionalEnv:
+      - name: INSTALL4J_ADD_VM_PARAMS
+        value: |
+          -Xms2703m -Xmx2703m
+          -Dnexus.datastore.enabled=true -Djava.util.prefs.userRoot=${NEXUS_DATA}/javaprefs
+          -Dnexus.datastore.nexus.jdbcUrl=jdbc:postgresql://${DB_HOST}:5432/${DB_NAME}
+          -Dnexus.datastore.nexus.username=${DB_USER}
+          -Dnexus.datastore.nexus.password=${DB_PASSWORD}"
+
+secret:
+  dbSecret:
+    enabled: true
+  db:
+    user: nexus
+    passsword: {{ .Values.secrets.nexus.pgNexusPassword }}
+    host: nexus-pg-postgresql.mbcaas-tools.svc.cluster.local
+  nexusAdmin:
+    name: {{ .Values.secrets.admin.username }}
+  nexusAdminSecret:
+    enabled: true
+    adminPassword: {{ .Values.secrets.admin.password }}
