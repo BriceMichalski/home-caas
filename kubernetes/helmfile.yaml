@@ -61,6 +61,9 @@ repositories:
   - name: mongodb
     url: https://mongodb.github.io/helm-charts
 
+  - name: sonatype
+    url: https://sonatype.github.io/helm3-charts/
+
 
 releases:
   # Storage
@@ -150,4 +153,13 @@ releases:
   - name: mongodb
     namespace: extra-operator
     chart: mongodb/community-operator
+
+  - name: nexus-pg
+    namespace: mbcaas-tools
+    chart: bitnami/postgresql
+    <<: *default
+
+  - name: nexus
+    namespace: mbcaas-tools
+    chart: sonatype/nxrm-ha
     <<: *default

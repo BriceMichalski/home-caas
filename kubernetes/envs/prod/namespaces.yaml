@@ -33,3 +33,7 @@ namespaces:
         cpu: 3
         pvcs: 5
         storage: 5Gi
+
+  - name: mbcaas-tools
+    system: false
+    disableQuotas: true
