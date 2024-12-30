@@ -25,6 +25,7 @@ releases:
 
     # EXTRA-OPERATOR
     strimzi: 0.33.2
+    mongodb: 0.9.0
 
     # TOOLS
     nexus-pg: 16.1.2
@@ -54,6 +55,7 @@ releases:
 
     # EXTRA-OPERATOR
     strimzi: true
+    mongodb: true
 
     # TOOLS
     nexus-pg: true

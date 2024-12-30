@@ -15,7 +15,7 @@ ingress:
   enabled: true
   hostname: {{ .Values.dns.keycloak }}
   annotations:
-    {{ toYaml .Values.helper.ingress.annotations.common | nindent 6 }}
+    {{ toYaml .Values.helper.ingress.annotations.common | nindent  }}
 
 
 postgresql:
